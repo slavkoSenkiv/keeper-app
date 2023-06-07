@@ -1,8 +1,17 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import Header from './Header';
+import Footer from './Footer';
+import Note from './Note';
 
 function App(){
-    return <h1>Hey hey</h1>
+    return (
+        <div>
+            <Header />
+            <Note />
+            <Footer />
+        </div>
+    )
 }
 
 export default App;
