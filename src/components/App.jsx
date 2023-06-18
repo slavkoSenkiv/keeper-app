@@ -6,7 +6,8 @@ import CreateArea from './CreateArea';
 import notes from '../notes';
 
 function App(){
-    const [notesArr, setNotes] = useState(notes);
+
+    const [notesArr, setNotesArr] = useState(notes);
 
     return (
         <div>
@@ -14,17 +15,16 @@ function App(){
             <Header/>
 
             <CreateArea 
-                arr={notesArr}                     
-                updArr={setNotes}
+                notesArr={notesArr}
+                updArr={setNotesArr}
             />
 
             {notesArr.map((note)=> (
                 <Note 
-                    key={note.key}
-                    noteKey={note.key}
                     noteTitle={note.title} 
                     noteContent={note.content}
-                    updArr={setNotes}
+                    updArr={setNotesArr}
+                    noteKey={note.key}
                 />
             ))}
 

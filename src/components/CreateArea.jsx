@@ -1,29 +1,32 @@
 import React, {useState} from "react";
 
-function CreateArea(props) {
-  const [newTitle, setNewTitle] = useState(""); 
+function CreateArea(props){
+
+  const [newTitle, setNewTitle] = useState("");
   const [newContent, setNewContent] = useState("");
 
-  function handleTitleInput(event){
-    setNewTitle(event.target.value);
+  function handleTitleChange(event){
+    let titleInput = event.target.value;
+    setNewTitle(titleInput);
   }
 
-  function handleContentInput(event){
-    setNewContent(event.target.value);
+  function handleContentChange(event){
+    let contentInput = event.target.value;
+    setNewContent(contentInput);
   }
 
-  function buildNoteObj(titleText, contentText){
+  function createNoteObj(){
     return {
-      key: props.arr.length + 1,
-      title: titleText,
-      content: contentText
+      key: props.notesArr.length + 1,
+      title: newTitle,
+      content: newContent
     }
   }
 
   function addNote(event){
     event.preventDefault();
-    let newEntry = buildNoteObj(newTitle, newContent);
-    props.updArr(prevNotesArr=>[...prevNotesArr, newEntry]);
+    let newNoteEntry = createNoteObj()
+    props.updArr([newNoteEntry, ...props.notesArr]);
     setNewTitle("");
     setNewContent("");
   }
@@ -32,20 +35,9 @@ function CreateArea(props) {
     <div>
       <form onSubmit={addNote}>
       
-        <input 
-          name="title" 
-          placeholder="Title"
-          onChange={handleTitleInput}
-          value={newTitle}
-        />
+        <h1><input placeholder="enter title" onChange={handleTitleChange} value={newTitle}/></h1>
 
-        <textarea 
-          name="content" 
-          placeholder="Take a note..." 
-          rows="3"
-          onChange={handleContentInput}
-          value={newContent}
-        />
+        <textarea placeholder="enter content" onChange={handleContentChange} value={newContent}/>
 
         <button type="submit">Add</button>
 
