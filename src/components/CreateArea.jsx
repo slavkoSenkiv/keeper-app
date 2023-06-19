@@ -1,9 +1,13 @@
 import React, {useState} from "react";
+import SaveIcon from '@mui/icons-material/Save';
+import Fab from '@mui/material/Fab';
+import Zoom from '@mui/material/Zoom';
 
 function CreateArea(props){
 
   const [newTitle, setNewTitle] = useState("");
   const [newContent, setNewContent] = useState("");
+  const [zoomed, setZoomed] = useState(true);
 
   function handleTitleChange(event){
     let titleInput = event.target.value;
@@ -31,15 +35,38 @@ function CreateArea(props){
     setNewContent("");
   }
 
+  function handleAppearence(){
+    zoomed ? setZoomed(false) : setZoomed(true);
+  }
+
   return (
     <div>
-      <form onSubmit={addNote}>
-      
-        <h1><input placeholder="enter title" onChange={handleTitleChange} value={newTitle}/></h1>
+      <form 
+        onSubmit={addNote} 
+        className="create-note"
+        onClick={handleAppearence}>
 
-        <textarea placeholder="enter content" onChange={handleContentChange} value={newContent}/>
+        <Zoom in={zoomed}>
+          <h1>
+            <input 
+              placeholder="enter title" 
+              onChange={handleTitleChange} 
+              value={newTitle}
+            />
+          </h1>
+        </Zoom>
 
-        <button type="submit">Add</button>
+        <textarea 
+          placeholder="enter content" 
+          onChange={handleContentChange} 
+          value={newContent}
+        />
+
+        <Zoom in={true}>
+          <Fab type="submit">
+            <SaveIcon/>
+          </Fab>
+        </Zoom>
 
       </form>
     </div>
